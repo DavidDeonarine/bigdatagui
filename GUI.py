@@ -13,6 +13,11 @@ header = [[sg.Text('Credit Card Qualifier', pad=(100, 0), background_color='#0c3
           [sg.Text('Please complete all fields below!', pad=(200, 0), background_color='#0c3578',
                    justification='center', font=("Arial", 15))]]
 
+error_layout = [[sg.Text('  ATTENTION USER  ', pad=(100, 0), background_color='#780e05', justification='center',
+                         size=(20, 1), font=("Helvetica", 25))],
+                [sg.Text('\nPlease ensure all data is entered correctly!', justification='center', font=("Arial", 20))]
+                ]
+
 # To collect person identifiers from user. Can be stored for future use.
 personal_info = [
     [sg.Text('First Name', pad=(0, 10), font=("Arial", 12)), sg.InputText(key='fname', size=(20, 3), pad=((0, 99), 10)),
@@ -23,7 +28,7 @@ personal_info = [
      sg.Text('Email', font=("Arial", 12)),
      sg.InputText(key='email_address', size=(20, 3))],
     [sg.Text('Gender', font=("Arial", 12), pad=(0, 10)),
-     sg.InputCombo(['Female', 'Male'], enable_events=True, key='gender', pad=((0, 225), 10)),
+     sg.InputCombo(['Female', 'Male'], readonly=True, enable_events=True, key='gender', pad=((0, 225), 10)),
      sg.Text('Age', font=("Arial", 12)),
      sg.InputText(key='dob', size=(5, 3))]]
 
@@ -33,61 +38,63 @@ payment_layout = [[sg.Text('Payment History', pad=(0, 0), font=("Arial", 15))],
                    sg.InputCombo(['0: 1-29 days past due', '1: 30-59 days past due', '2: 60-89 days overdue',
                                   '3: 90-119 days overdue', '4: 120-149 days overdue',
                                   '5: More than 150 days overdue', 'C: Paid off the month',
-                                  'X: No loan for the month'], enable_events=True, key='payment1')],
+                                  'X: No loan for the month'], readonly=True, enable_events=True, key='payment1')],
                   [sg.Text('Payment Status for Prior Month:', font=("Arial", 12), pad=(0, 10)),
                    sg.InputCombo(['0: 1-29 days past due', '1: 30-59 days past due', '2: 60-89 days overdue',
                                   '3: 90-119 days overdue', '4: 120-149 days overdue',
                                   '5: More than 150 days overdue', 'C: Paid off the month',
-                                  'X: No loan for the month'], enable_events=True, key='payment2')],
+                                  'X: No loan for the month'], readonly=True, enable_events=True, key='payment2')],
                   [sg.Text('Payment Status for 2 Months Ago:', font=("Arial", 12), pad=(0, 10)),
                    sg.InputCombo(['0: 1-29 days past due', '1: 30-59 days past due', '2: 60-89 days overdue',
                                   '3: 90-119 days overdue', '4: 120-149 days overdue',
                                   '5: More than 150 days overdue', 'C: Paid off the month',
-                                  'X: No loan for the month'], enable_events=True, key='payment3')],
+                                  'X: No loan for the month'], enable_events=True, readonly=True, key='payment3')],
                   [sg.Text('Payment Status for 3 Months Ago:', font=("Arial", 12), pad=(0, 10)),
                    sg.InputCombo(['0: 1-29 days past due', '1: 30-59 days past due', '2: 60-89 days overdue',
                                   '3: 90-119 days overdue', '4: 120-149 days overdue',
                                   '5: More than 150 days overdue', 'C: Paid off the month',
-                                  'X: No loan for the month'], enable_events=True, key='payment4')],
+                                  'X: No loan for the month'], enable_events=True, readonly=True, key='payment4')],
                   [sg.Button('Submit')]
                   ]
+
 # To collect features for prediction
 features = [[sg.Text('COMPLETE ALL FIELDS BELOW TO CALCULATE YOUR RISK', pad=(90, 0), background_color='#0c3578',
                      justification='center', font=("Arial", 15))],
             [sg.Text('Do you own a vehicle?', font=("Arial", 12), pad=((0, 20), 10)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='vehicle'),
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='vehicle'),
              sg.Text('\tDo you own property?', font=("Arial", 12)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='realty')],
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='realty')],
             [sg.Text('Do you have children?', font=("Arial", 12), pad=(0, 10)),
-             sg.InputCombo(['No children', '1 children', '2+ children'], enable_events=True,
+             sg.InputCombo(['No children', '1 children', '2+ children'], readonly=True, enable_events=True,
                            key='children'),
              sg.Text(' Highest Level of Education', font=("Arial", 12)),
              sg.InputCombo(['Secondary / secondary special', 'Higher education',
                             'Incomplete higher', 'Lower secondary', 'Academic degree'],
-                           enable_events=True, key='education', size=(40, 3))],
+                           enable_events=True, readonly=True, key='education', size=(40, 3))],
             [sg.Text('Marital Status', font=("Arial", 12), pad=(0, 10)),
              sg.InputCombo(['Married', 'Single / not married', 'Civil marriage', 'Separated', 'Widow'],
-                           enable_events=True, key='mstatus', pad=((0, 81), 10)),
+                           enable_events=True, readonly=True, key='mstatus', pad=((0, 81), 10)),
              sg.Text(' Housing Type', font=("Arial", 12), pad=(0, 10)),
              sg.InputCombo(['With parents', 'House / apartment', 'Rented apartment', 'Municipal apartment',
-                            'Co-op apartment', 'Office apartment'], enable_events=True, key='housing')],
+                            'Co-op apartment', 'Office apartment'], readonly=True, enable_events=True, key='housing')],
             [sg.Text('Current Annual Income (USD)', font=("Arial", 12), pad=(0, 10)),
              sg.InputText(key='income', size=(10, 3), pad=((0, 58), 10)),
              sg.Text('Job Description', font=("Arial", 12)),
              sg.InputCombo(['Accountants', 'Cleaning staff', 'Cooking staff', 'Core staff', 'Drivers', 'HR staff',
                             'High skill tech staff', 'IT staff', 'Laborers', 'Low-skill Laborers', 'Managers',
                             'Medicine staff', 'Private service staff', 'Realty agents', 'Sales staff', 'Secretaries',
-                            'Security staff', 'Waiters/barmen staff'], enable_events=True, key='job')],
+                            'Security staff', 'Waiters/barmen staff'], readonly=True, enable_events=True, key='job')],
             [sg.Text('Date of Employment (MM-DD-YYYY)', font=("Arial", 12), pad=(0, 10)),
-             sg.InputText(key='start_date', size=(20, 3))],
+             sg.InputText(key='month', size=(3, 3)), sg.Text('-', pad=(0, 0)), sg.InputText(key='day', size=(3, 3)),
+             sg.Text('-', pad=(0, 0)), sg.InputText(key='year', size=(5, 3))],
             [sg.Text('Do you have a mobile phone?', font=("Arial", 12), pad=(0, 10)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='mobile'),
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='mobile'),
              sg.Text('\tDo you have a work phone?', font=("Arial", 12)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='workphone')],
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='workphone')],
             [sg.Text('Do you have a residential line?', font=("Arial", 12), pad=(0, 10)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='residentialphone'),
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='residentialphone'),
              sg.Text('\tDo you have an email?', font=("Arial", 12)),
-             sg.InputCombo(['Yes', 'No'], enable_events=True, key='email')],
+             sg.InputCombo(['Yes', 'No'], readonly=True, enable_events=True, key='email')],
             ]
 
 trends_layout = [[sg.Button('High Risk Age', pad=((80, 80), 10), button_color='dark red'),
@@ -104,6 +111,7 @@ trends_layout = [[sg.Button('High Risk Age', pad=((80, 80), 10), button_color='d
                   sg.Button('Low Risk Job', pad=((0, 80), 10), button_color='dark blue')],
                  [sg.Exit()]
                  ]
+
 # Combine layout for main window
 data_layout = [
     [sg.Column(header, background_color='#0c3578', justification='center')],
@@ -153,7 +161,12 @@ def createTrendWindow():
     return sg.Window("Data Analytics", layout)
 
 
-window = sg.Window('COMP3610 | Group 2', data_layout)
+def createErrorWindow():
+    layout = copy.deepcopy(error_layout)  # Cannot reuse layouts in pysimplegui
+    return sg.Window("ATTENTION!", layout)
+
+
+window = sg.Window('COMP3610 | Group A', data_layout)
 
 while True:
     event, values = window.Read()
@@ -184,124 +197,133 @@ while True:
                     break
 
     if event == 'Check My Risk':
-        df = pd.DataFrame(
-            columns=['CODE_GENDER', 'FLAG_OWN_CAR', 'FLAG_OWN_REALTY', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL',
-                     'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE', 'AGE',
-                     'FLAG_MOBIL', 'FLAG_WORK_PHONE', 'FLAG_PHONE', 'FLAG_EMAIL', 'JOB', 'BEGIN_MONTHS',
-                     'STATUS'])
+        try:
+            df = pd.DataFrame(
+                columns=['CODE_GENDER', 'FLAG_OWN_CAR', 'FLAG_OWN_REALTY', 'CNT_CHILDREN', 'AMT_INCOME_TOTAL',
+                         'NAME_EDUCATION_TYPE', 'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE', 'AGE',
+                         'FLAG_MOBIL', 'FLAG_WORK_PHONE', 'FLAG_PHONE', 'FLAG_EMAIL', 'JOB', 'BEGIN_MONTHS',
+                         'STATUS'])
 
-        fname = values['fname']
-        lname = values['lname']
-        number = values['number']
-        email_address = values['email_address']
+            fname = values['fname']
+            lname = values['lname']
+            number = values['number']
+            email_address = values['email_address']
+            doe = str(values['month']) + "-" + str(values['day']) + "-" + str(values['year'])
+            doe = datetime.strptime(doe, '%m-%d-%Y').date()
+            # doe = datetime.strptime(values['start_date'], '%m-%d-%Y').date()
+            today = date.today()
+            emp_days = today - doe
+            emp_days = float(emp_days.days)
 
-        doe = datetime.strptime(values['start_date'], '%m-%d-%Y').date()
-        today = date.today()
-        emp_days = today - doe
-        emp_days = float(emp_days.days)
+            new_row1 = [[gender_dict.get(values['gender']),
+                         car_dict.get(values['vehicle']),
+                         realty_dict.get(values['realty']),
+                         children_dict.get(values['children']),
+                         values['income'],
+                         education_dict.get(values['education']),
+                         family_dict.get(values['mstatus']),
+                         housing_dict.get(values['housing']),
+                         values['dob'],
+                         emp_days,
+                         mobile_dict.get(values['mobile']),
+                         work_phone_dict.get(values['workphone']),
+                         phone_dict.get(values['residentialphone']),
+                         email_dict.get(values['email']),
+                         job_dict.get(values['job']),
+                         0,
+                         status_dict.get(status1)]]
 
-        new_row1 = [[gender_dict.get(values['gender']),
-                     car_dict.get(values['vehicle']),
-                     realty_dict.get(values['realty']),
-                     children_dict.get(values['children']),
-                     values['income'],
-                     education_dict.get(values['education']),
-                     family_dict.get(values['mstatus']),
-                     housing_dict.get(values['housing']),
-                     values['dob'],
-                     emp_days,
-                     mobile_dict.get(values['mobile']),
-                     work_phone_dict.get(values['workphone']),
-                     phone_dict.get(values['residentialphone']),
-                     email_dict.get(values['email']),
-                     job_dict.get(values['job']),
-                     0,
-                     status_dict.get(status1)]]
+            new_row2 = [[gender_dict.get(values['gender']),
+                         car_dict.get(values['vehicle']),
+                         realty_dict.get(values['realty']),
+                         children_dict.get(values['children']),
+                         values['income'],
+                         education_dict.get(values['education']),
+                         family_dict.get(values['mstatus']),
+                         housing_dict.get(values['housing']),
+                         values['dob'],
+                         emp_days,
+                         mobile_dict.get(values['mobile']),
+                         work_phone_dict.get(values['workphone']),
+                         phone_dict.get(values['residentialphone']),
+                         email_dict.get(values['email']),
+                         job_dict.get(values['job']),
+                         -1,
+                         status_dict.get(status2)]]
 
-        new_row2 = [[gender_dict.get(values['gender']),
-                     car_dict.get(values['vehicle']),
-                     realty_dict.get(values['realty']),
-                     children_dict.get(values['children']),
-                     values['income'],
-                     education_dict.get(values['education']),
-                     family_dict.get(values['mstatus']),
-                     housing_dict.get(values['housing']),
-                     values['dob'],
-                     emp_days,
-                     mobile_dict.get(values['mobile']),
-                     work_phone_dict.get(values['workphone']),
-                     phone_dict.get(values['residentialphone']),
-                     email_dict.get(values['email']),
-                     job_dict.get(values['job']),
-                     -1,
-                     status_dict.get(status2)]]
+            new_row3 = [[gender_dict.get(values['gender']),
+                         car_dict.get(values['vehicle']),
+                         realty_dict.get(values['realty']),
+                         children_dict.get(values['children']),
+                         values['income'],
+                         education_dict.get(values['education']),
+                         family_dict.get(values['mstatus']),
+                         housing_dict.get(values['housing']),
+                         values['dob'],
+                         emp_days,
+                         mobile_dict.get(values['mobile']),
+                         work_phone_dict.get(values['workphone']),
+                         phone_dict.get(values['residentialphone']),
+                         email_dict.get(values['email']),
+                         job_dict.get(values['job']),
+                         -2,
+                         status_dict.get(status3)]]
 
-        new_row3 = [[gender_dict.get(values['gender']),
-                     car_dict.get(values['vehicle']),
-                     realty_dict.get(values['realty']),
-                     children_dict.get(values['children']),
-                     values['income'],
-                     education_dict.get(values['education']),
-                     family_dict.get(values['mstatus']),
-                     housing_dict.get(values['housing']),
-                     values['dob'],
-                     emp_days,
-                     mobile_dict.get(values['mobile']),
-                     work_phone_dict.get(values['workphone']),
-                     phone_dict.get(values['residentialphone']),
-                     email_dict.get(values['email']),
-                     job_dict.get(values['job']),
-                     -2,
-                     status_dict.get(status3)]]
+            new_row4 = [[gender_dict.get(values['gender']),
+                         car_dict.get(values['vehicle']),
+                         realty_dict.get(values['realty']),
+                         children_dict.get(values['children']),
+                         values['income'],
+                         education_dict.get(values['education']),
+                         family_dict.get(values['mstatus']),
+                         housing_dict.get(values['housing']),
+                         values['dob'],
+                         emp_days,
+                         mobile_dict.get(values['mobile']),
+                         work_phone_dict.get(values['workphone']),
+                         phone_dict.get(values['residentialphone']),
+                         email_dict.get(values['email']),
+                         job_dict.get(values['job']),
+                         -3,
+                         status_dict.get(status4)]]
 
-        new_row4 = [[gender_dict.get(values['gender']),
-                     car_dict.get(values['vehicle']),
-                     realty_dict.get(values['realty']),
-                     children_dict.get(values['children']),
-                     values['income'],
-                     education_dict.get(values['education']),
-                     family_dict.get(values['mstatus']),
-                     housing_dict.get(values['housing']),
-                     values['dob'],
-                     emp_days,
-                     mobile_dict.get(values['mobile']),
-                     work_phone_dict.get(values['workphone']),
-                     phone_dict.get(values['residentialphone']),
-                     email_dict.get(values['email']),
-                     job_dict.get(values['job']),
-                     -3,
-                     status_dict.get(status4)]]
+            new_row11 = {'CODE_GENDER': gender_dict.get(values['gender']), 'AGE': values['dob'],
+                         'FLAG_OWN_CAR': car_dict.get(values['vehicle']),
+                         'FLAG_OWN_REALTY': realty_dict.get(values['realty']),
+                         'CNT_CHILDREN': children_dict.get(values['children']),
+                         'NAME_EDUCATION_TYPE': education_dict.get(values['education']),
+                         'NAME_FAMILY_STATUS': family_dict.get(values['mstatus']),
+                         'NAME_HOUSING_TYPE': housing_dict.get(values['housing']),
+                         'JOB': job_dict.get(values['job']), 'BEGIN_MONTHS': emp_days,
+                         'AMT_INCOME_TOTAL': values['income'], 'FLAG_MOBIL': mobile_dict.get(values['mobile']),
+                         'FLAG_WORK_PHONE': work_phone_dict.get(values['workphone']),
+                         'FLAG_PHONE': phone_dict.get(values['residentialphone']),
+                         'FLAG_EMAIL': email_dict.get(values['email']), 'STATUS': status_dict.get(status1)}
 
-        new_row11 = {'CODE_GENDER': gender_dict.get(values['gender']), 'AGE': values['dob'],
-                     'FLAG_OWN_CAR': car_dict.get(values['vehicle']),
-                     'FLAG_OWN_REALTY': realty_dict.get(values['realty']),
-                     'CNT_CHILDREN': children_dict.get(values['children']),
-                     'NAME_EDUCATION_TYPE': education_dict.get(values['education']),
-                     'NAME_FAMILY_STATUS': family_dict.get(values['mstatus']),
-                     'NAME_HOUSING_TYPE': housing_dict.get(values['housing']),
-                     'JOB': job_dict.get(values['job']), 'BEGIN_MONTHS': emp_days,
-                     'AMT_INCOME_TOTAL': values['income'], 'FLAG_MOBIL': mobile_dict.get(values['mobile']),
-                     'FLAG_WORK_PHONE': work_phone_dict.get(values['workphone']),
-                     'FLAG_PHONE': phone_dict.get(values['residentialphone']),
-                     'FLAG_EMAIL': email_dict.get(values['email']), 'STATUS': status_dict.get(status1)}
+            # df = df.append(new_row11, ignore_index=True) # Original implementation for dataframe
 
-        # df = df.append(new_row11, ignore_index=True) # Original implementation for dataframe
+            row1 = np.array(new_row1)
+            row2 = np.array(new_row2)
+            row3 = np.array(new_row3)
+            row4 = np.array(new_row4)
 
-        row1 = np.array(new_row1)
-        row2 = np.array(new_row2)
-        row3 = np.array(new_row3)
-        row4 = np.array(new_row4)
+            pd.set_option('display.max_rows', None, 'display.max_columns', None)
 
-        pd.set_option('display.max_rows', None, 'display.max_columns', None)
+            risk = predict.predict(row1, row2, row3, row4)
 
-        risk = predict.predict(row1, row2, row3, row4)
+            report_layout = [
+                [sg.Text('NAME: ' + fname + " " + lname, font=("Arial", 15))],
+                [sg.Text('CONTACT: ' + number, font=("Arial", 15)),
+                 sg.Text('EMAIL: ' + email_address, font=("Arial", 15))],
+                [sg.Text('RISK ASSESSMENT: ' + risk, font=("Arial", 16), background_color='#470505', pad=(0, 10))]]
 
-        report_layout = [
-            [sg.Text('NAME: ' + fname + " " + lname, font=("Arial", 15))],
-            [sg.Text('CONTACT: ' + number, font=("Arial", 15)), sg.Text('EMAIL: ' + email_address, font=("Arial", 15))],
-            [sg.Text('RISK ASSESSMENT: ' + risk, font=("Arial", 16), background_color='#470505', pad=(0, 10))]]
+            window2 = sg.Window('Risk Assessment', layout=report_layout).Read()
 
-        window2 = sg.Window('Risk Assessment', layout=report_layout).Read()
+        except:
+            error_window = createErrorWindow()
+            event1, values = error_window.Read()
+            if event1 == sg.WIN_CLOSED or event1 == 'Exit':
+                error_window.Close()
 
     if event == 'Investigate Database':  # for graphs/ analytics
         window3 = createTrendWindow()
