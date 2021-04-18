@@ -95,4 +95,3 @@ def lowRiskJob():
     sns.countplot(y='JOB', data=df_0)
     plt.title("Job Distribution of Low Risk Persons")
     plt.show()
-
