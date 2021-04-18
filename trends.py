@@ -18,14 +18,16 @@ df_0 = df_0[df_0["TARGET"] == 0]
 
 
 def highRiskAge():
-    plt.title("Age Distribution of High Risk Persons")
+    plt.figure(figsize=(15, 6))
     sns.countplot(x='AGE', data=df_1)
+    plt.title("Age Distribution of High Risk Persons")
     plt.show()
 
 
 def lowRiskAge():
-    plt.title("Age Distribution of Low Risk Persons")
+    plt.figure(figsize=(15, 6))
     sns.countplot(x='AGE', data=df_0)
+    plt.title("Age Distribution of Low Risk Persons")
     plt.show()
 
 
@@ -42,26 +44,30 @@ def lowRiskGender():
 
 
 def highRiskFamily():
-    plt.title("Family Distribution of High Risk Persons")
+    plt.figure(figsize=(15, 4))
     sns.countplot(y='NAME_FAMILY_STATUS', data=df_1)
+    plt.title("Family Distribution of High Risk Persons")
     plt.show()
 
 
 def lowRiskFamily():
-    plt.title("Family Distribution of Low Risk Persons")
+    plt.figure(figsize=(15, 4))
     sns.countplot(y='NAME_FAMILY_STATUS', data=df_0)
+    plt.title("Family Distribution of Low Risk Persons")
     plt.show()
 
 
 def highRiskEducation():
-    plt.title("Education Distribution of High Risk Persons")
+    plt.figure(figsize=(15, 5))
     sns.countplot(y='NAME_EDUCATION_TYPE', data=df_1)
+    plt.title("Education Distribution of High Risk Persons")
     plt.show()
 
 
 def lowRiskEducation():
-    plt.title("Education Distribution of Low Risk Persons")
+    plt.figure(figsize=(15, 5))
     sns.countplot(y='NAME_EDUCATION_TYPE', data=df_0)
+    plt.title("Education Distribution of Low Risk Persons")
     plt.show()
 
 
@@ -78,12 +84,15 @@ def lowRiskChildren():
 
 
 def highRiskJob():
-    plt.title("Job Distribution of Low Risk Persons")
+    plt.figure(figsize=(15, 6))
     sns.countplot(y='JOB', data=df_1)
+    plt.title("Job Distribution of Low Risk Persons")
     plt.show()
 
 
 def lowRiskJob():
-    plt.title("Job Distribution of Low Risk Persons")
+    plt.figure(figsize=(15, 6))
     sns.countplot(y='JOB', data=df_0)
+    plt.title("Job Distribution of Low Risk Persons")
     plt.show()
+
