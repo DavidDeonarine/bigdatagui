@@ -9,8 +9,7 @@ def predict(row1, row2, row3, row4):
     from sklearn.ensemble import RandomForestClassifier
 
     print("Prediction in Progress!")
-    df = pd.read_csv(
-        '/Users/DavidAaronDeonarine/Desktop/MyCourses/COMP3610/Assignments/Project/credit_card_approval.csv')
+    df = pd.read_csv('credit_card_approval.csv')
     df.head()
     df = df.drop(columns=['ID'])
     df.head()

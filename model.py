@@ -12,8 +12,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.metrics import plot_confusion_matrix
 
-df = pd.read_csv(
-    '/Users/DavidAaronDeonarine/Desktop/MyCourses/COMP3610/Assignments/Project/credit_card_approval.csv')
+df = pd.read_csv('credit_card_approval.csv')
 df.head()
 df = df.drop(columns=['ID'])
 df.head()

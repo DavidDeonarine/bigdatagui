@@ -2,8 +2,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv(
-    '/Users/DavidAaronDeonarine/Desktop/MyCourses/COMP3610/Assignments/Project/credit_card_approval.csv')
+df = pd.read_csv('credit_card_approval.csv')
 df.head()
 df = df.drop(columns=['ID'])
 
