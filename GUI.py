@@ -4,8 +4,8 @@ import pandas as pd
 from datetime import datetime
 from datetime import date
 import copy
-import predict  # predict script
-import trends
+import predict  # predict.py script
+import trends   # trend.py script
 
 # GUI Layouts
 header = [[sg.Text('Credit Card Qualifier', pad=(100, 0), background_color='#0c3578', justification='center',

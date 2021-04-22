@@ -32,13 +32,13 @@ def lowRiskAge():
 
 def highRiskGender():
     plt.title("Gender Distribution of High Risk Persons")
-    sns.countplot(x='CODE_GENDER', data=df_1)
+    sns.countplot(x='CODE_GENDER', data=df_1, palette=['pink', 'blue'])
     plt.show()
 
 
 def lowRiskGender():
     plt.title("Gender Distribution of Low Risk Persons")
-    sns.countplot(x='CODE_GENDER', data=df_0)
+    sns.countplot(x='CODE_GENDER', data=df_0, palette=['pink', 'blue'])
     plt.show()
 
 
